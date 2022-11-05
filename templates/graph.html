@@ -4,6 +4,7 @@
     <meta charset = 'UTF-8'>
     <meta name = "viewport" content = "width =device-width' intial-scale = 1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-trendline"></script>
     <title>HRV</title>
     <h1>Tom's Oura Data</h1>
 <!--    <script> src = "https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"</script>-->
@@ -15,15 +16,27 @@
         var linechart = new Chart(ctx, {
             type: "line",
             data: {
-                labels: {{ labels | safe }},
+                labels: {{ dates | safe }},
                 datasets: [
                 {
-                    label: "HRV",
-                    data : {{values | safe}},
+                    label: "HRV Average",
+                    data : {{hrv_avgs | safe}},
                     fill : false,
                     borderColor: "rgb(75,192,192)",
-                    lineTension: 0.1
-                }
+                    lineTension: 0.1,
+                    trendlineLinear: {
+<!--                        style: "rgba(255,105,180, .8)",-->
+                        colorMin: "red",
+                        colorMax: "green",
+                        lineStyle: "line",
+                        width: 1
+                    }
+
+                },
+
+
+
+
             ]
         },
         options: {
@@ -37,11 +50,11 @@
         var bar_chart_1 = new Chart(ctx, {
             type: "bar",
             data: {
-                labels: {{ labels | safe }},
+                labels: {{ dates | safe }},
                 datasets: [
                 {
                     label: "HRV",
-                    data : {{values | safe}},
+                    data : {{scores | safe}},
                     fill : false,
                     borderColor: "rgb(75,192,192)",
                     lineTension: 0.1
@@ -53,10 +66,11 @@
             }
         });
     </script>
-Tom Test
+aa
 </body>
 </html>
 
 
 
 <!--https://cdn.jsdelivr.net/npm/chart.js-->
+<!--https://www.npmjs.com/package/chartjs-plugin-trendline-->
